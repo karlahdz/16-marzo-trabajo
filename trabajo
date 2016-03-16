@@ -1,0 +1,25 @@
+numpro<-sample(5:8,60,replace=TRUE)
+cepob<-sample(0:5,60,replace=TRUE)
+porcocup<-sample(40:60,60,replace=TRUE)
+porcdesocup<-sample(3:8,60,replace=TRUE)
+tabla<-data.frame(numpro,cepob,porcocup,porcdesocup)
+tabla
+tabla12<-tabla[c(1:12,49:60),]
+tabla12
+st<- ts(tabla[,], start=2010, freq=12)
+np<- ts(st[,1], start=2010, freq=12)
+cp<- ts(st[,2], start=2010, freq=12)
+po<- ts(st[,3], start=2010, freq=12)
+pdes<- ts(st[,4], start=2010, freq=12)
+seriemult<-ts.intersect(np,po)
+plot(seriemult, main="Profesionistas y Ocupados", xlab="Años", ylab="Numero", col="blue")
+seriemult2<-ts.intersect(cp,pdes)
+plot(seriemult2, main="PIB y desocupados", xlab="Años", ylab="Numero", col="orange")
+seriemult3<-ts.intersect(np,cp,po,pdes)
+plot(seriemult3, main="Serie multiple", xlab="Años", ylab="Numero", col="green")
+layout(1:2)
+seriemultiple15<-window(seriemult3, start=c(2014,1), end=c(2014,12))
+seriemultiple15
+plot(seriemultiple15, main="Serie multiple 2014", xlab="Años", ylab="Numero", col="orange")
+seriemult3
+###Al ser dATOS ALEATORIOS podemos darnos cuenta que no siguen ningun patrón por lo que no se puede decir que tengan una tendencia estacional
